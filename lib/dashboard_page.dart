@@ -19,17 +19,15 @@ class _DashboardPageState extends State<DashboardPage> {
 
   void _onItemTapped(int index) {
     if (index == 1) {
-      // Navigate to SearchPage when the "Search" item is tapped
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const SearchPage()),
       );
     } else if (index == 2) {
-      // Navigate to ProfilePage when the "Profile" item is tapped
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ProfilePage(username: 'Daffa'), // Pass the username here
+          builder: (context) => ProfilePage(username: widget.username),
         ),
       );
     } else {
@@ -42,51 +40,65 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey, // Assign the GlobalKey to the Scaffold
+      key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text('Dashboard'),
-        automaticallyImplyLeading: false, // Disable the back button
+        automaticallyImplyLeading: false,
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
-              icon: const Icon(Icons.menu), // Menu button
+              icon: const Icon(Icons.menu),
               onPressed: () {
-                _scaffoldKey.currentState?.openDrawer();  // Open Drawer using the GlobalKey
+                _scaffoldKey.currentState?.openDrawer();
               },
             );
           },
+        ),
+        centerTitle: true,
+        title: CircleAvatar(
+          radius: 20,
+          backgroundColor: Colors.transparent,
+          child: ClipOval(
+            child: Image.network(
+              'https://static.wikia.nocookie.net/minigt/images/b/b1/Logo3.jpg/revision/latest?cb=20201124084256',
+              width: 40,
+              height: 40,
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Sad emoji
-            const Text(
-              '😞', // Sad emoji
-              style: TextStyle(fontSize: 100),
+            // Sad face icon
+            Icon(
+              Icons.sentiment_dissatisfied, // Icon representing a sad face
+              color: Colors.grey,
+              size: 80,
             ),
             const SizedBox(height: 20),
-            // Text below the emoji
+            // Text below the icon
             const Text(
-              'Your wishlist is empty', // Message about the empty wishlist
-              style: TextStyle(fontSize: 18),
+              'Wishlist still empty', // Message in English
+              style: TextStyle(fontSize: 18, color: Colors.black54),
             ),
+            const SizedBox(height: 10),
           ],
         ),
       ),
-      drawer: Drawer( // Slide menu (Drawer)
+      drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text(widget.username), // Display username in the drawer
-              accountEmail: Text('mdaffaf1102@gmail.com'), // Display email (optional)
+              accountName: Text(widget.username),
+              accountEmail: Text('mdaffaf1102@gmail.com'),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.blueAccent,
                 child: Text(
-                  widget.username[0], // Display first letter of the username
-                  style: TextStyle(fontSize: 40),
+                  widget.username[0],
+                  style: const TextStyle(fontSize: 40),
                 ),
               ),
             ),
@@ -94,7 +106,7 @@ class _DashboardPageState extends State<DashboardPage> {
               leading: const Icon(Icons.home),
               title: const Text('Home'),
               onTap: () {
-                Navigator.pop(context); // Close the drawer
+                Navigator.pop(context);
                 setState(() {
                   _selectedIndex = 0;
                 });
@@ -117,7 +129,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ProfilePage(username: 'Daffa'),
+                    builder: (context) => ProfilePage(username: widget.username),
                   ),
                 );
               },

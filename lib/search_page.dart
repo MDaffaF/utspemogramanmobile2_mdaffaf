@@ -35,13 +35,25 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Search'),
+        centerTitle: true,
+        title: CircleAvatar(
+          radius: 20,
+          backgroundColor: Colors.transparent,
+          child: ClipOval(
+            child: Image.network(
+              'https://static.wikia.nocookie.net/minigt/images/b/b1/Logo3.jpg/revision/latest?cb=20201124084256',
+              width: 40,
+              height: 40,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Kolom Search di atas GridView
+            // Search column above the GridView
             TextField(
               decoration: InputDecoration(
                 labelText: 'Search',
@@ -52,17 +64,18 @@ class SearchPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16.0),
-            // GridView dengan item dan gambar
+            // GridView with items and images
             Expanded(
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Jumlah kolom di grid
-                  crossAxisSpacing: 10.0, // Jarak antar kolom
-                  mainAxisSpacing: 10.0, // Jarak antar baris
+                  crossAxisCount: 2, // Number of columns in the grid
+                  crossAxisSpacing: 10.0, // Horizontal spacing between columns
+                  mainAxisSpacing: 10.0, // Vertical spacing between rows
                 ),
-                itemCount: items.length, // Jumlah item yang ditampilkan
+                itemCount: items.length, // Number of items to display
                 itemBuilder: (context, index) {
                   return Card(
+                    elevation: 4.0,
                     child: GridTile(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,

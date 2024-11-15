@@ -15,7 +15,19 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        centerTitle: true,
+        title: CircleAvatar(
+          radius: 20,
+          backgroundColor: Colors.transparent,
+          child: ClipOval(
+            child: Image.network(
+              'https://static.wikia.nocookie.net/minigt/images/b/b1/Logo3.jpg/revision/latest?cb=20201124084256',
+              width: 40,
+              height: 40,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
@@ -36,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 10),
                 // Display the username dynamically
                 Text(
-                  'Welcome, ${widget.username}!', // Use widget.username here
+                  '${widget.username}', // Use widget.username here
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 20),

@@ -15,11 +15,13 @@ class _LoginPageState extends State<LoginPage> {
   String staticUsername = 'Daffa';
   String staticPassword = 'tes';
 
+  // Fungsi untuk memproses login
   void _login() {
     String username = _usernameController.text;
     String password = _passwordController.text;
 
     if (username == staticUsername && password == staticPassword) {
+      // Navigasi ke halaman dashboard jika login berhasil
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -27,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
     } else {
+      // Tampilkan dialog jika login gagal
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -43,11 +46,17 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  // Fungsi untuk mendaftar akun baru
+  void _signUp() {
+    // Navigasi atau logika untuk halaman pendaftaran bisa ditambahkan di sini
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
+          // Background Image
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -57,18 +66,20 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
+          
+          // Formulir Login
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                // Icon User Profile
-               CircleAvatar(
+                // Logo Avatar
+                CircleAvatar(
                   radius: 40,
                   backgroundColor: Colors.black.withOpacity(0.5),
                   child: ClipOval(
                     child: Image.network(
-                      'https://scontent-cgk1-1.xx.fbcdn.net/v/t39.30808-6/363339275_111793885341604_7301233373824174936_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGrRw1z5h4B0f3SR-L3f-_Q_omP0uluL37-iY_S6W4vfrVWSHhbkUGh7_6RNhb5m5MW-ZxLEA7SQTlPKtXDitBr&_nc_ohc=2Cc6StawzpwQ7kNvgFNd6iH&_nc_oc=AdhLvOR4y9jba_GT2FTR7ilYC4PMcw6VLd49X1OAJWKYiERTaLWq9W5IVHTvAxyDk1s&_nc_zt=23&_nc_ht=scontent-cgk1-1.xx&_nc_gid=A7QsL1tjy78_PF_IRNtcEh1&oh=00_AYA3VjqhSe5m0u7zZeVSl0QttJSr2ESoJ9xiRd-WJLG7nQ&oe=673BD07B',
+                      'https://static.wikia.nocookie.net/minigt/images/b/b1/Logo3.jpg/revision/latest?cb=20201124084256',
                       width: 80,
                       height: 80,
                       fit: BoxFit.contain,
@@ -76,6 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
+
                 // Username Field
                 TextField(
                   controller: _usernameController,
@@ -88,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(color: Colors.white),
                 ),
                 const SizedBox(height: 10),
+
                 // Password Field
                 TextField(
                   controller: _passwordController,
@@ -101,6 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(color: Colors.white),
                 ),
                 const SizedBox(height: 20),
+
                 // Login Button
                 ElevatedButton(
                   onPressed: _login,
@@ -113,9 +127,29 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
+                const SizedBox(height: 16),
+
+                // Sign Up Link
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Don't have an account?",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    TextButton(
+                      onPressed: _signUp,
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
+          
           // Copyright Text
           Align(
             alignment: Alignment.bottomCenter,
